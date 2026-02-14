@@ -8,10 +8,20 @@ on:
 jobs:
   scrape:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install requests beautifulsoup4 pandas gspread google-auth
-      - run: python scrape.py
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4 pandas gspread google-auth
+
+      - name: Create Google credentials file
+        run: |
+          echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT }}" > service_account.json
+
+      - name: Run scraper
+        run: python scrape.py
