@@ -19,9 +19,12 @@ jobs:
       - name: Install dependencies
         run: pip install requests beautifulsoup4 pandas gspread google-auth
 
-      - name: Create Google credentials file
+      - name: Write Google service account file
+        env:
+          GOOGLE_CREDS: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
         run: |
-          echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT }}" > service_account.json
+          printf "%s" "$GOOGLE_CREDS" > service_account.json
+          ls -l service_account.json
 
       - name: Run scraper
         run: python scrape.py
