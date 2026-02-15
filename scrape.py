@@ -26,6 +26,5 @@ SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 creds = Credentials.from_service_account_file("service_account.json", scopes=SCOPES)
 client = gspread.authorize(creds)
 
-sheet = client.open_by_key("https://docs.google.com/spreadsheets/d/1PlCdbnvpW-f4iSAgDAioF7nvP1KV7eEH2VMHvL87FOU/edit?gid=0#gid=0").sheet1
-sheet.clear()
+sheet = client.open_by_key("1PlCdbnvpW-f4iSAgDAioF7nvP1KV7eEH2VMHvL87FOU").sheet1
 sheet.update([df.columns.values.tolist()] + df.values.tolist())
