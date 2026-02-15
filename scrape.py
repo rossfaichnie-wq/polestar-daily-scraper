@@ -46,6 +46,9 @@ payload = {
 response = requests.post(URL, json=payload)
 data = response.json()
 
+print("Full response:")
+print(data)
+
 ads = data["data"]["searchVehicleAds"]["ads"]
 
 cars = []
